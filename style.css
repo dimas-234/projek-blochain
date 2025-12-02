@@ -1,0 +1,402 @@
+/* GitHub-inspired Theme */
+:root {
+  --gh-dark: #0d1117;
+  --gh-darker: #010409;
+  --gh-card: #161b22;
+  --gh-border: #30363d;
+  --gh-text: #c9d1d9;
+  --gh-text-secondary: #8b949e;
+  --gh-blue: #58a6ff;
+  --gh-green: #3fb950;
+  --gh-orange: #f0883e;
+  --gh-red: #f85149;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  background-color: var(--gh-dark);
+  color: var(--gh-text);
+}
+
+/* Navbar */
+.navbar-custom {
+  background-color: var(--gh-darker);
+  border-bottom: 1px solid var(--gh-border);
+  padding: 1rem 0;
+}
+
+.navbar-brand {
+  color: var(--gh-text) !important;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.nav-link {
+  color: var(--gh-text) !important;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--gh-blue) !important;
+}
+
+.nav-link.active {
+  color: var(--gh-blue) !important;
+}
+
+.dropdown-menu {
+  background-color: var(--gh-card);
+  border: 1px solid var(--gh-border);
+}
+
+.dropdown-item {
+  color: var(--gh-text) !important;
+}
+
+.dropdown-item:hover {
+  background-color: var(--gh-blue);
+  color: #fff !important;
+}
+
+/* Pages */
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, var(--gh-darker) 0%, var(--gh-card) 100%);
+  border: 1px solid var(--gh-border);
+  border-radius: 12px;
+  padding: 3rem;
+  margin: 2rem 0;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.datetime-display {
+  color: var(--gh-orange);
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+/* Cards */
+.feature-card {
+  background-color: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.feature-card:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+  border-color: var(--gh-blue);
+}
+
+.feature-card i {
+  font-size: 2.5rem;
+  color: var(--gh-blue);
+  margin-bottom: 1rem;
+}
+
+.feature-card h5 {
+  color: var(--gh-text);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+  color: var(--gh-text-secondary);
+  margin-bottom: 0;
+}
+
+/* Form Elements */
+.form-label {
+  color: var(--gh-text);
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+textarea,
+input[type="text"],
+input[type="number"],
+select {
+  background-color: var(--gh-darker);
+  border: 1px solid var(--gh-border);
+  color: var(--gh-text);
+  border-radius: 6px;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+  background-color: var(--gh-darker);
+  border-color: var(--gh-blue);
+  color: var(--gh-text);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+}
+
+.output-box {
+  background-color: var(--gh-darker);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  padding: 1rem;
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+  color: var(--gh-green);
+  min-height: 50px;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--gh-blue);
+  border: 1px solid var(--gh-blue);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #4a93e5;
+  border-color: #4a93e5;
+}
+
+.btn-success {
+  background-color: var(--gh-green);
+  border: 1px solid var(--gh-green);
+  border-radius: 6px;
+}
+
+.btn-success:hover {
+  background-color: #2ea043;
+  border-color: #2ea043;
+}
+
+.btn-danger {
+  background-color: var(--gh-red);
+  border: 1px solid var(--gh-red);
+  border-radius: 6px;
+}
+
+.btn-danger:hover {
+  background-color: #da3633;
+  border-color: #da3633;
+}
+
+/* Blockchain Blocks */
+.blockchain-container {
+  margin-top: 2rem;
+}
+
+.blockchain-block {
+  background-color: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.blockchain-block h5 {
+  color: var(--gh-blue);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Wallets */
+.wallet-card {
+  background-color: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.wallet-card h5 {
+  color: var(--gh-blue);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.balance-display {
+  background-color: var(--gh-darker);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gh-green);
+  margin-bottom: 1rem;
+}
+
+/* Chain Blocks for Consensus */
+.chain-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.chain-block {
+  background-color: var(--gh-card);
+  border: 1px solid var(--gh-green);
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 300px;
+  flex-shrink: 0;
+}
+
+.chain-block.invalid {
+  border-color: var(--gh-red);
+  background-color: rgba(248, 81, 73, 0.1);
+}
+
+.chain-block input,
+.chain-block textarea {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Status Messages */
+.status-message {
+  color: var(--gh-orange);
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* About Section */
+.profile-card {
+  background-color: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.profile-img {
+  width: 80%;
+  border-radius: 10%;
+  border: 3px solid var(--gh-blue);
+  margin-bottom: 1.5rem;
+}
+
+.social-links a {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background-color: var(--gh-darker);
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  color: var(--gh-text);
+  margin: 0.25rem;
+  transition: all 0.2s;
+  font-size: 1.5rem;
+}
+
+.social-links a:hover {
+  background-color: var(--gh-blue);
+  border-color: var(--gh-blue);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.map-container {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--gh-border);
+}
+
+/* Page Container */
+.page-container {
+  background-color: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.page-container h2 {
+  color: var(--gh-text);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gh-border);
+}
+
+/* Ensure contact form inputs match Bootstrap look */
+#contact-form .form-control {
+  background-color: #fff;
+  color: #212529;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Keep same style on focus */
+#contact-form .form-control:focus {
+  background-color: #fff;
+  color: #212529;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* Make form controls on simulation pages use white background and dark text */
+#page-hash textarea,
+#page-block textarea,
+#page-block input,
+#page-block .form-select,
+#page-ecc textarea,
+#page-ecc input,
+#page-ecc .form-select,
+#page-consensus input,
+#page-consensus select,
+#page-consensus textarea,
+#page-chain input,
+#page-chain textarea,
+#page-chain select,
+.page .form-control,
+.page .form-select {
+  background-color: #ffffff;
+  color: #212529;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Focus state */
+#page-block input:focus,
+#page-block textarea:focus,
+#page-ecc textarea:focus,
+#page-consensus input:focus,
+#page-consensus textarea:focus,
+.page .form-control:focus,
+.page .form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* Fix browser autofill dark background */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+  -webkit-text-fill-color: #212529 !important;
+}

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Simulator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-cube"></i> Blockchain Simulator
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" id="tab-home" href="#" onclick="showPage('home')">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Simulasi
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="showPage('hash')">Hash Generator</a></li>
+                <li><a class="dropdown-item" href="#" onclick="showPage('block')">Single Block</a></li>
+                <li><a class="dropdown-item" href="#" onclick="showPage('chain')">Blockchain</a></li>
+                <li><a class="dropdown-item" href="#" onclick="showPage('ecc')">ECC Signature</a></li>
+                <li><a class="dropdown-item" href="#" onclick="showPage('consensus')">Konsensus</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tab-about" href="#" onclick="showPage('about')">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page: Home -->
+    <div id="page-home" class="page active">
+      <div class="container">
+        <div class="hero-section text-center">
+          <h1><i class="fas fa-link"></i> Blockchain Simulator</h1>
+          <p class="lead">Interactive learning platform untuk memahami konsep blockchain, mining, hashing, dan konsensus
+          </p>
+          <div class="datetime-display" id="datetime"></div>
+        </div>
+
+        <div class="mt-5">
+          <h3 class="text-center mb-4">Apa yang bisa kamu pelajari?</h3>
+          <div class="row g-4 cursor-pointer">
+            <div class="col-md-4">
+              <div class="feature-card text-center" onclick="showPage('hash')">
+                <i class="fas fa-hashtag"></i>
+                <h5>Hash Generator</h5>
+                <p>Pelajari bagaimana fungsi hash SHA-256 mengubah data menjadi fingerprint digital yang unik.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="feature-card text-center" onclick="showPage('block')">
+                <i class="fas fa-cube"></i>
+                <h5>Block Mining</h5>
+                <p>Pahami proses mining: mencari nonce yang menghasilkan hash dengan difficulty tertentu.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="feature-card text-center" onclick="showPage('chain')">
+                <i class="fas fa-link"></i>
+                <h5>Blockchain</h5>
+                <p>Lihat bagaimana block-block saling terhubung membentuk rantai yang immutable.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="feature-card text-center" onclick="showPage('ecc')">
+                <i class="fas fa-key"></i>
+                <h5>Digital Signature</h5>
+                <p>Eksperimen dengan Elliptic Curve Cryptography untuk signing dan verifikasi pesan.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="feature-card text-center" onclick="showPage('consensus')">
+                <i class="fas fa-users"></i>
+                <h5>Konsensus</h5>
+                <p>Simulasi bagaimana multiple nodes mencapai kesepakatan tentang state blockchain.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="feature-card text-center">
+                <i class="fas fa-rocket"></i>
+                <h5>Real-time Simulation</h5>
+                <p>Semua simulasi berjalan langsung di browser tanpa memerlukan server backend.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <p class="text-secondary">Mulai eksplorasi dengan memilih salah satu simulasi dari menu di atas!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Hash -->
+    <div id="page-hash" class="page">
+      <div class="container">
+        <div class="page-container">
+          <h2><i class="fas fa-hashtag"></i> Hash Generator</h2>
+          <p class="text-secondary">Masukkan teks apapun dan lihat hasil hash SHA-256 nya secara real-time.</p>
+
+          <label class="form-label">Text Input:</label>
+          <textarea id="hash-input" rows="5" placeholder="Ketik sesuatu..."></textarea>
+
+          <label class="form-label mt-3">SHA-256 Hash:</label>
+          <div id="hash-output" class="output-box"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Block -->
+    <div id="page-block" class="page">
+      <div class="container">
+        <div class="page-container">
+          <h2><i class="fas fa-cube"></i> Single Block Mining</h2>
+          <p class="text-secondary">Coba proses mining: cari nonce yang menghasilkan hash dengan 4 leading zeros.</p>
+
+          <label class="form-label">Data:</label>
+          <textarea id="block-data" rows="4" placeholder="Masukkan data block..."></textarea>
+
+          <label class="form-label">Nonce:</label>
+          <input id="block-nonce" type="text" value="0">
+
+          <label class="form-label">Timestamp:</label>
+          <input id="block-timestamp" type="text" readonly>
+
+          <label class="form-label">Hash:</label>
+          <div id="block-hash" class="output-box"></div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label class="form-label">Kecepatan Mining:</label>
+              <select id="speed-control" class="form-select">
+                <option value="1">Normal</option>
+                <option value="10">10x Lebih Cepat</option>
+                <option value="50">50x Lebih Cepat</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="btn-mine" class="btn btn-primary mt-3"><i class="fas fa-hammer"></i> Mine Block</button>
+          <div id="mining-status" class="status-message"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Blockchain -->
+    <div id="page-chain" class="page">
+      <div class="container">
+        <div class="page-container">
+          <h2><i class="fas fa-link"></i> Blockchain</h2>
+          <p class="text-secondary">Tambahkan block dan lihat bagaimana perubahan data pada satu block mempengaruhi
+            chain.</p>
+
+          <div id="blockchain" class="blockchain-container"></div>
+
+          <button id="btn-add-block" class="btn btn-success mt-3"><i class="fas fa-plus"></i> Add Block</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: ECC -->
+    <div id="page-ecc" class="page">
+      <div class="container">
+        <div class="page-container">
+          <h2><i class="fas fa-key"></i> ECC Digital Signature</h2>
+          <p class="text-secondary">Generate keypair, sign message, dan verifikasi signature menggunakan Elliptic Curve
+            Cryptography.</p>
+
+          <button id="btn-generate-key" class="btn btn-primary mb-3"><i class="fas fa-key"></i> Generate Key
+            Pair</button>
+          <label class="form-label">Public Key:</label>
+          <textarea id="ecc-public" rows="2" readonly></textarea>
+
+          <label class="form-label">Private Key:</label>
+          <textarea id="ecc-private" rows="2" readonly></textarea>
+
+          <hr class="my-4">
+
+          <label class="form-label">Pesan yang akan ditandatangani:</label>
+          <textarea id="ecc-message" rows="3" placeholder="Tulis pesan..."></textarea>
+
+          <button id="btn-sign" class="btn btn-success mt-2 mb-3"><i class="fas fa-signature"></i> Sign Message</button>
+
+          <label class="form-label">Hasil Signature (DER hex):</label>
+          <textarea id="ecc-signature" rows="3" readonly></textarea>
+
+          <hr class="my-4">
+
+          <button id="btn-verify" class="btn btn-primary"><i class="fas fa-check-circle"></i> Verify Signature</button>
+          <div id="ecc-verify-result" class="output-box mt-3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Consensus -->
+    <div id="page-consensus" class="page">
+      <div class="container">
+        <div class="page-container">
+          <h2><i class="fas fa-users"></i> Simulasi Konsensus</h2>
+          <p class="text-secondary">Simulasi 3 node (User A, B, C) yang melakukan transaksi dan mining secara
+            distributed.</p>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="wallet-card">
+                <h5>User A</h5>
+                <div class="balance-display">Saldo: <span id="saldo-A">100</span></div>
+                <label class="form-label">Penerima:</label>
+                <select id="receiver-A" class="form-select">
+                  <option value="B">User B</option>
+                  <option value="C">User C</option>
+                </select>
+                <label class="form-label">Jumlah:</label>
+                <input id="amount-A" type="number" min="1" value="10">
+                <button id="send-A" class="btn btn-primary w-100 mt-2"><i class="fas fa-paper-plane"></i> Kirim</button>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="wallet-card">
+                <h5>User B</h5>
+                <div class="balance-display">Saldo: <span id="saldo-B">100</span></div>
+                <label class="form-label">Penerima:</label>
+                <select id="receiver-B" class="form-select">
+                  <option value="A">User A</option>
+                  <option value="C">User C</option>
+                </select>
+                <label class="form-label">Jumlah:</label>
+                <input id="amount-B" type="number" min="1" value="10">
+                <button id="send-B" class="btn btn-primary w-100 mt-2"><i class="fas fa-paper-plane"></i> Kirim</button>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="wallet-card">
+                <h5>User C</h5>
+                <div class="balance-display">Saldo: <span id="saldo-C">100</span></div>
+                <label class="form-label">Penerima:</label>
+                <select id="receiver-C" class="form-select">
+                  <option value="A">User A</option>
+                  <option value="B">User B</option>
+                </select>
+                <label class="form-label">Jumlah:</label>
+                <input id="amount-C" type="number" min="1" value="10">
+                <button id="send-C" class="btn btn-primary w-100 mt-2"><i class="fas fa-paper-plane"></i> Kirim</button>
+              </div>
+            </div>
+          </div>
+
+          <label class="form-label">Mempool (pending transactions):</label>
+          <textarea id="mempool" rows="3" readonly placeholder="Transaksi pending akan muncul di sini..."></textarea>
+
+          <div class="mt-3">
+            <button id="btn-mine-all" class="btn btn-success me-2"><i class="fas fa-hammer"></i> Mine Semua
+              Transaksi</button>
+            <button id="btn-verify-consensus" class="btn btn-primary me-2"><i class="fas fa-check"></i> Verify</button>
+            <button id="btn-consensus" class="btn btn-danger"><i class="fas fa-sync"></i> Consensus</button>
+          </div>
+
+          <h4 class="mt-5 mb-3">Blockchain Tiap User</h4>
+
+          <h5 class="text-info">Database User A</h5>
+          <div id="chain-A" class="chain-row"></div>
+
+          <h5 class="text-info mt-4">Database User B</h5>
+          <div id="chain-B" class="chain-row"></div>
+
+          <h5 class="text-info mt-4">Database User C</h5>
+          <div id="chain-C" class="chain-row"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: About -->
+    <div id="page-about" class="page">
+      <div class="container">
+        <div class="page-container">
+          <h2><i class="fas fa-user"></i> About Me</h2>
+
+          <div class="row mt-4">
+            <div class="col-md-4">
+              <div class="profile-card text-center">
+                <img src="DTMK TRM.jpg" alt="Profile" class="profile-img">
+                <h4>Muhammad Dimas Fajar Ramadhani</h4>
+                <p class="text-secondary">Teknologi Rekayasa Multimedia</p>
+
+                <div class="social-links mt-4">
+                  <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                  <a href="https://www.linkedin.com/in/dimas-fajar-r-960757312?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                  <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                  <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <div class="profile-card">
+                <h4 class="mb-3"><i class="fas fa-info-circle"></i> Tentang Saya</h4>
+                <p class="text-secondary">
+                  Saya adalah seorang developer yang passionate tentang teknologi blockchain dan cryptocurrency.
+                  Saya membuat simulator ini untuk membantu orang lain memahami konsep fundamental blockchain
+                  dengan cara yang interaktif dan mudah dipahami.
+                </p>
+                <p class="text-secondary">
+                  Dengan pengalaman di bidang web development dan cryptography, saya senang berbagi pengetahuan
+                  dan membuat tools edukatif yang bermanfaat bagi komunitas.
+                </p>
+
+                <h5 class="mt-4 mb-3"><i class="fas fa-code"></i> Skills</h5>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge bg-primary">JavaScript</span>
+                  <span class="badge bg-primary">Blockchain</span>
+                  <span class="badge bg-primary">Cryptography</span>
+                  <span class="badge bg-primary">Smart Contracts</span>
+                  <span class="badge bg-primary">Web3</span>
+                  <span class="badge bg-primary">Node.js</span>
+                </div>
+
+                <h5 class="mt-4 mb-3"><i class="fas fa-map-marker-alt"></i> Lokasi</h5>
+                <div class="map-container">
+                  <iframe width="100%" height="300" frameborder="0" style="border:0"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.692178167003!2d112.79117721046906!3d-7.275824292701009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa10ea2ae883%3A0xbe22c55d60ef09c7!2sPoliteknik%20Elektronika%20Negeri%20Surabaya!5e0!3m2!1sid!2sid!4v1764620387160!5m2!1sid!2sid"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="profile-card">
+                <h4 class="mb-3"><i class="fas fa-envelope"></i> Leave Me a Message</h4>
+                <form id="contact-form">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Nama</label>
+                      <input type="text" class="form-control" placeholder="Nama Anda" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Email</label>
+                      <input type="email" class="form-control" placeholder="Email Anda" required>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Pesan</label>
+                    <textarea class="form-control" rows="4" placeholder="Tulis pesan Anda..." required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Elliptic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elliptic/6.5.4/elliptic.min.js"></script>
+    <!-- Custom JS -->
+    <script src="app4.js"></script>
+  </body>
+
+</html>
